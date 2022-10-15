@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Sidans titel (development)</title>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="/">Start</a></li>
-                <li><a href="/api/">/api</a></li>
-                <li><a href="/api/users/">/api/users</a></li>
-            </ul>
-        </nav>
-        <main>
-            <h1 id="DocumentTitle">Frontend 1: Examinationsuppgift</h1>
-            <section id="MainDescription">
-                <p>
-                    Välkommen till kursen "Frontent 1: Javascript" hos Nackademin. Hoppas alla har kul.
-                    </p>
-                <p>
-                    Det här projektet är tänkt att ge alla studenter ett ramverk för att dela, testa, granska och lämna in kod. Glöm inte att ha kul ':p
-                    </p>
-            </section>
-            
-            <section data-source="content">
-            </section>
+  <head>
+    <title>Sidans titel (development)</title>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Tar bort Favicon error -->
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Start</a></li>
+        <li><a href="/api/">/api</a></li>
+        <li><a href="/api/users/">/api/users</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h1 id="DocumentTitle">Frontend 1: Examinationsuppgift</h1>
+      <section data-source="content"></section>
+      <section>
+        <h2>Sorter</h2>
+        <select name="sort-selector" id="sort-selector" class="table-btn">
+          <option value="none">-- Välj Sortering --</option>
+          <option value="all">Alla</option>
+          <option value="blue">Blå</option>
+          <option value="red">Röd</option>
+          <option value="yellow">Gul</option>
+          <option value="green">Grön</option>
+        </select>
+        <button class="btn-select-sorter table-btn">Sortera</button>
+        <button class="clear-table-btn table-btn">Clear</button>
+      </section>
+      <section class="container-output"></section>
 
-            <section>
-                <ul>
-                    <li>
-                        <em>Förnamn:</em><span data-source="firstname"></span>
-                      </li>
-                    <li>
-                        <em>Efternamn:</em><span data-source="lastname"></span>
-                      </li>
-                  </ul>
-            </section>
-            <section class="newSection"></section>
-
-        </main>
-        <script src="script.js"></script>
-    </body>
+      <div class="table-container">
+        <div id="table"></div>
+      </div>
+    </main>
+  </body>
 </html>
