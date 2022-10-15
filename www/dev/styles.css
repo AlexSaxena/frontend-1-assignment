@@ -24,6 +24,9 @@ nav > ul {
   gap: 1rem;
   list-style: none;
 }
+button {
+  cursor: pointer;
+}
 .table-container {
   display: inline-block;
 }
@@ -35,6 +38,8 @@ table {
   display: block;
   margin-top: 20px;
   border-collapse: collapse;
+  text-align: center;
+  cursor: default;
 }
 table tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -46,4 +51,11 @@ th,
 td {
   border: 1px solid #ddd;
   padding: 8px;
+}
+td:hover {
+  background-color: #7d7d7d;
+}
+table tr:not(:first-child):hover {
+  background-color: #7d7d7d;
+  color: whitesmoke;
 }
