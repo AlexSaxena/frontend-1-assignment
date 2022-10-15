@@ -1,8 +1,10 @@
 {
-  "firstname": "Mr",
-  "lastname": "waldo",
-  "github": "JohnDoe",
-  "Hobby": "Traveling",
+  "firstname": "Chris",
+  "lastname": "Trott",
+  "github": "GitTestUserTrott",
+  "Hobby": "Boardgames",
   "birthYear": "1234",
-  "food": "Fish N Chips"
+  "food": "pie",
+  "discord": "Ctrott#1337",
+  "personalityType": "röd"
 }

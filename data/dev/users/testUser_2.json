@@ -4,5 +4,7 @@
   "github": "JohnDoe",
   "Hobby": "Traveling",
   "birthYear": "1234",
-  "food": "Fish N Chips"
+  "food": "Fish N Chips",
+  "personalityType": "grön",
+  "discord": "JohnDoe#1234"
 }
