@@ -8,51 +8,103 @@ function getContentFromApi(filename, selector) {
     });
 }
 //getContentFromApi("ovningar1-10.md", '[data-source="content"]');
+let allUsersJSON;
 
 function getUsers() {
-  fetch("http://localhost:4000/api/users/")
+  fetch("http://localhost:3000/api/users/")
     .then((response) => (response = response.json()))
     .then((users) => {
-      sortByColour(users);
-
-      // console.table(users);
-      // console.log(typeof users);
-
-      let newSection = document.querySelector(".newSection");
-
-      users.forEach((user) => {
-        for (let key in user) {
-          let element = document.querySelector(`[data-source=${key}]`);
-          if (element) {
-            element.innerText = user[key];
-          }
-        }
-        for (const [key, value] of Object.entries(user)) {
-          //console.log(`${key}: ${value}`);
-          let newP = document.createElement("p");
-          newP.innerText = `${key}: ${value}!`;
-          newSection.append(newP);
-        }
-      });
+      console.log("User JSON promise", users);
+      console.log("User JSON typeOf ->", typeof users);
+      allUsersJSON = users;
     });
 }
+// -------------------------------------------------------
 
-function sortByColour(users) {
-  console.log("Inuti sortByColour");
-  let userArrayRed = ["Röd"];
-  let userArrayYellow = ["Gul"];
-  let userArrayBlue = ["Blå"];
-  let userArrayGreen = ["Grön"];
-  let userArrayRest = ["rest"];
+// Selectors
+let outputContainer = document.querySelector(".container-output");
+let btnClear = document.querySelector(".clear-table-btn");
+let myTable = document.querySelector("#table");
+let selectSortOptions = document.querySelector("#sort-selector");
+let btnSorterSelect = document.querySelector(".btn-select-sorter");
+let isTable = true;
+console.log("Table Bool", isTable);
 
-  console.log(users);
-  for (const key in users) {
-    if (Object.hasOwnProperty.call(users, key)) {
-      const element = users[key];
-      // console.log("This is an ->" + typeof element);
-      // console.log("userColorType ->" + element.personalityType);
-      // console.log("TypeOF color ->" + typeof element.personalityType);
-      // console.table(element);
+// Header Titles
+let headers = ["FirstName", "LastName", "Discord", "Personality"];
+
+// Filter for JSon Objects
+const userFilter = ({ firstname, lastname, discord, personalityType }) => ({
+  firstname,
+  lastname,
+  discord,
+  personalityType,
+});
+
+// EventListeners
+btnClear.addEventListener("click", clearTable);
+btnSorterSelect.addEventListener("click", () => {
+  if (selectSortOptions.value == "none") {
+    console.log("None Selected");
+  } else if (selectSortOptions.value == "all") {
+    clearTable();
+    generateTable();
+  } else {
+    clearTable();
+    let sortedArray = sortByColour(selectSortOptions.value);
+    generateTable(sortedArray);
+  }
+});
+
+// Functions
+function clearTable() {
+  isTable = true;
+  while (myTable.firstChild) {
+    myTable.removeChild(myTable.lastChild);
+  }
+}
+
+function generateTable(userObjects = allUsersJSON) {
+  if (userObjects < 1) return console.log("None Selected");
+  if (isTable) {
+    let table = document.createElement("table");
+    let headerRow = document.createElement("tr");
+    headers.forEach((headerText) => {
+      let header = document.createElement("th");
+      let textNode = document.createTextNode(headerText);
+      header.appendChild(textNode);
+      headerRow.appendChild(header);
+    });
+    table.appendChild(headerRow);
+
+    userObjects.forEach((aUser) => {
+      let row = document.createElement("tr");
+      let newUser = userFilter(aUser);
+
+      Object.values(newUser).forEach((text) => {
+        let cell = document.createElement("td");
+        let textNode = document.createTextNode(text);
+        cell.appendChild(textNode);
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+    myTable.appendChild(table);
+    isTable = false;
+  }
+}
+
+function sortByColour(colour = "rest") {
+  console.log("sortByColours", colour);
+  let userArrayRed = [];
+  let userArrayYellow = [];
+  let userArrayBlue = [];
+  let userArrayGreen = [];
+  let userArrayRest = [];
+
+  for (const key in allUsersJSON) {
+    if (Object.hasOwnProperty.call(allUsersJSON, key)) {
+      const element = allUsersJSON[key];
       if (element.personalityType === "gul") {
         userArrayYellow.push(element);
       } else if (element.personalityType === "blå") {
@@ -66,8 +118,24 @@ function sortByColour(users) {
       }
     }
   }
-  console.log(userArrayBlue);
-  console.log(userArrayYellow);
+  // console.log("Blå Array", userArrayBlue);
+  // console.log("Gul Array", userArrayYellow);
+  // console.log("Grön Array", userArrayGreen);
+  // console.log("Röd Array", userArrayRed);
+  // console.log("rest Array", userArrayRest);
+
+  switch (colour) {
+    case "red":
+      return userArrayRed;
+    case "blue":
+      return userArrayBlue;
+    case "yellow":
+      return userArrayYellow;
+    case "green":
+      return userArrayGreen;
+    default:
+      return userArrayRest;
+  }
 }
 
 getUsers();
