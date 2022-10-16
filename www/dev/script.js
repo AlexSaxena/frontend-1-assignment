@@ -31,7 +31,7 @@ let isTable = true;
 console.log("Table Bool", isTable);
 
 // Header Titles
-let headers = ["FirstName", "LastName", "Discord", "Personality"];
+let headers = ["Förnamn", "Efternamn", "Discord", "Personlighetstyp"];
 
 // Filter for JSon Objects
 const userFilter = ({ firstname, lastname, discord, personalityType }) => ({
