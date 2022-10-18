@@ -8,8 +8,12 @@ function getContentFromApi(filename, selector) {
     });
 }
 //getContentFromApi("ovningar1-10.md", '[data-source="content"]');
+
+// -------------------------------------------------------------------------
+
 let allUsersJSON;
 
+// Fetches all the users and parses them.
 function getUsers() {
   fetch("http://localhost:3000/api/users/")
     .then((response) => (response = response.json()))
@@ -57,6 +61,7 @@ btnSorterSelect.addEventListener("click", () => {
 });
 
 // Functions
+// Clears Table on DOM
 function clearTable() {
   isTable = true;
   while (myTable.firstChild) {
@@ -64,6 +69,7 @@ function clearTable() {
   }
 }
 
+// Generates new table on DOM
 function generateTable(userObjects = allUsersJSON) {
   if (userObjects < 1) return console.log("None Selected");
   if (isTable) {
@@ -94,6 +100,7 @@ function generateTable(userObjects = allUsersJSON) {
   }
 }
 
+// Sorts JSON into Array based on Colour then Returns desired Array
 function sortByColour(colour = "rest") {
   console.log("sortByColours", colour);
   let userArrayRed = [];
@@ -118,11 +125,6 @@ function sortByColour(colour = "rest") {
       }
     }
   }
-  // console.log("Blå Array", userArrayBlue);
-  // console.log("Gul Array", userArrayYellow);
-  // console.log("Grön Array", userArrayGreen);
-  // console.log("Röd Array", userArrayRed);
-  // console.log("rest Array", userArrayRest);
 
   switch (colour) {
     case "red":
