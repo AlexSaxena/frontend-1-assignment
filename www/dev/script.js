@@ -15,7 +15,7 @@ let allUsersJSON;
 
 // Fetches all the users and parses them.
 function getUsers() {
-  fetch("http://localhost:3000/api/users/")
+  fetch("http://localhost:4000/api/users/")
     .then((response) => (response = response.json()))
     .then((users) => {
       console.log("User JSON promise", users);
