@@ -47,7 +47,8 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 <br>
 
-<p> An assignments to showcase the basics of fetching and displaying data from a JSON file. </p>
+<p> An application to showcase the basics of fetching and displaying data from a JSON file. </p>
+<p> In this App userdata from JSON is being parsed and sorted based on personality colour </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
