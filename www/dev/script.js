@@ -34,7 +34,7 @@ let btnSorterSelect = document.querySelector(".btn-select-sorter");
 let isTable = true;
 console.log("Table Bool", isTable);
 
-// Header Titles
+// Header Titles for table
 let headers = ["Förnamn", "Efternamn", "Discord", "Personlighetstyp"];
 
 // Filter for JSon Objects
@@ -72,6 +72,7 @@ function clearTable() {
 // Generates new table on DOM
 function generateTable(userObjects = allUsersJSON) {
   if (userObjects < 1) return console.log("None Selected");
+  // isTable checks that there is no "active" table
   if (isTable) {
     let table = document.createElement("table");
     let headerRow = document.createElement("tr");
@@ -83,10 +84,13 @@ function generateTable(userObjects = allUsersJSON) {
     });
     table.appendChild(headerRow);
 
+    // userObjects is the param containing the sorted array
     userObjects.forEach((aUser) => {
       let row = document.createElement("tr");
+      // Removes excess values
       let newUser = userFilter(aUser);
 
+      // Fills the table with desired values
       Object.values(newUser).forEach((text) => {
         let cell = document.createElement("td");
         let textNode = document.createTextNode(text);
@@ -96,6 +100,7 @@ function generateTable(userObjects = allUsersJSON) {
       table.appendChild(row);
     });
     myTable.appendChild(table);
+    // sets isTable false because table is built & "active"
     isTable = false;
   }
 }
@@ -109,6 +114,11 @@ function sortByColour(colour = "rest") {
   let userArrayGreen = [];
   let userArrayRest = [];
 
+  // Loop that goes into allUsersJSON Array
+  // Gets the index value
+  // Picks out each Object in the form of the var element
+  // Checks if each objects personalityType matches the sent in Param colour
+  // Sorts accordingly into corresponding pre declared arrays
   for (const key in allUsersJSON) {
     if (Object.hasOwnProperty.call(allUsersJSON, key)) {
       const element = allUsersJSON[key];
@@ -126,6 +136,7 @@ function sortByColour(colour = "rest") {
     }
   }
 
+  // Returns desired array based on colour Param
   switch (colour) {
     case "red":
       return userArrayRed;
